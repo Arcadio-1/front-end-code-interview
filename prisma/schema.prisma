@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+type ProductsStatistics {
+  buyerRate Int
+  soled     Int
+  totalLike Int
+  totalRate Int
+  views     Int
+}
+
+model books {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  author    String
+  country   String
+  imageLink String
+  language  String
+  link      String
+  pages     Int
+  title     String
+  year      Int
+}
+
+model pokemon {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  attack          Int
+  defense         Int
+  hp              Int
+  name            String
+  oginal_id       Int
+  special_attack  Int
+  special_defense Int
+  speed           Int
+  type            String[]
+}
+
+model products {
+  id           String             @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt    DateTime           @db.Date
+  image_url    String
+  off_percent  Int
+  price        Int
+  selling_type String
+  statistics   ProductsStatistics
+  status       Boolean
+  title        String
+  updatedAt    DateTime           @db.Date
+}
